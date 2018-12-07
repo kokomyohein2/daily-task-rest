@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping(UserController.BASE_URL)
 public class UserController {
 
-    public static final String BASE_URL = "/user";
+    public static final String BASE_URL = "/v1/user";
 
     private final UserService userService;
 
@@ -19,17 +19,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping
+    @GetMapping
     public List<UserModel> userModels() {
         return userService.getAllUser();
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public UserModel getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    @RequestMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserModel addNewUser(@RequestBody UserModel user) {
         return userService.addNewUser(user);
